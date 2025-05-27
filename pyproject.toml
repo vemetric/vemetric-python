@@ -2,6 +2,7 @@
 name            = "vemetric"
 version         = "0.0.2"
 description     = "Official Python SDK for Vemetric"
+readme          = "README.md"
 authors         = [{ name="Vemetric", email="info@vemetric.com" }]
 license         = { text = "MIT" }
 requires-python = ">=3.9"
