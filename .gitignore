@@ -1,0 +1,12 @@
+# virtualenv / poetry
+.venv/
+__pycache__/
+*.py[cod]
+# build artefacts
+dist/
+build/
+*.egg-info/
+# editor junk
+.DS_Store
+.idea/
+.vscode/

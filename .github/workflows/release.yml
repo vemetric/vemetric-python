@@ -1,0 +1,57 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to release (e.g., 0.0.1)"
+        required: true
+        type: string
+      message:
+        description: "Message to include in the release"
+        required: true
+        type: string
+
+# Add permissions block
+permissions:
+  contents: write # Required for creating releases
+  packages: write # Required for creating packages
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+      - run: pip install -e '.[test]' && python -m pip install pytest
+      - run: pytest
+
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - run: pip install hatch
+      - name: Build & upload
+        env:
+          HATCH_INDEX_USER: __token__
+          HATCH_INDEX_AUTH: ${{ secrets.PYPI_API_TOKEN }}
+        run: |
+          hatch build
+          hatch publish
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ github.event.inputs.version }}
+          name: v${{ github.event.inputs.version }}
+          draft: false
+          prerelease: false
+          body: ${{ github.event.inputs.message }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
