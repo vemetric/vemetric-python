@@ -1,3 +1,5 @@
+![Vemetric Python SDK](https://github.com/user-attachments/assets/4709b219-c0d7-42a8-8a5a-e0801f1ce69a)
+
 # The Vemetric SDK for Python
 
 Learn more about the Vemetric Python SDK in the [official docs](https://vemetric.com/docs/sdks/python).
