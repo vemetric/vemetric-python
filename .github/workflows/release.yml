@@ -36,6 +36,27 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Configure Git
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'github-actions@github.com'
+
+      - name: Update version in code
+        run: |
+          echo "Current version in file:"
+          grep "version         " pyproject.toml
+          echo "Updating to version: ${{ github.event.inputs.version }}"
+          sed -i.bak "s/version         = \".*\"/         \"${{ github.event.inputs.version }}\"/" pyproject.toml
+          echo "Updated version in file:"
+          grep "version         " pyproject.toml
+          rm pyproject.toml.bak
+
+      - name: Commit and push changes
+        run: |
+          git add pyproject.toml
+          git commit -m "chore: bump version to ${{ github.event.inputs.version }}"
+          git push origin main
+
       - run: pip install hatch
       - name: Build & upload
         env:
