@@ -43,7 +43,7 @@ The client can be configured with the following options:
 vemetricClient = VemetricClient(
   token="YOUR_PROJECT_TOKEN", # Required
   host="https://hub.vemetric.com", # Optional, defaults to https://hub.vemetric.com
-  timeout: 2.0, # Optional, default to 2 seconds
-  session: requests.Session(), # Optional, defaults to None, creating a new one
+  timeout=2.0, # Optional, default to 2 seconds
+  session=requests.Session(), # Optional, defaults to None, creating a new one
 )
 ```
