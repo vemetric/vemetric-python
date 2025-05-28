@@ -3,13 +3,12 @@ Tests for the VemetricClient class
 """
 
 import json
-from unittest.mock import Mock, patch
+from unittest.mock import Mock
 
 import pytest
 import requests
-from requests_mock import Mocker
 
-from .client import VemetricClient, UserData
+from vemetric import VemetricClient
 
 @pytest.fixture
 def client():

@@ -22,3 +22,19 @@ test = [
     "pytest>=7.0",
     "requests-mock>=1.11",
 ]
+
+[tool.hatch.build.targets.wheel]
+exclude = [
+  "/tests",
+  "/examples",
+  "/.github",
+  "/.gitignore",
+]
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+  "/tests",
+  "/examples",
+  "/.github",
+  "/.gitignore",
+]
