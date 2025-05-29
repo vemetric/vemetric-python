@@ -6,6 +6,8 @@ Learn more about the Vemetric Python SDK in the [official docs](https://vemetric
 
 You can also checkout the package on [PyPI](https://pypi.org/project/vemetric).
 
+[![PyPI - Version](https://img.shields.io/pypi/v/vemetric)](https://pypi.org/project/vemetric)
+
 ## Installation
 
 ```bash
