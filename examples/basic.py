@@ -1,6 +1,6 @@
 from vemetric import VemetricClient
 
-vemetricClient = VemetricClient(token="WRlW37cPSLUAbXDk76wYU", host="http://localhost:4004")
+vemetricClient = VemetricClient(token="o1rySsGlUtFCyflo", host="http://localhost:4004")
 
 vemetricClient.track_event(
     "SignupCompleted",
