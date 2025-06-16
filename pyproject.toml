@@ -10,8 +10,8 @@ dependencies    = ["requests>=2.27"]
 
 [project.urls]
 Homepage    = "https://vemetric.com"
-Source      = "https://github.com/Vemetric/vemetric-python"
-Tracker     = "https://github.com/Vemetric/vemetric-python/issues"
+Source      = "https://github.com/vemetric/vemetric-python"
+Tracker     = "https://github.com/vemetric/vemetric-python/issues"
 
 [build-system]
 requires = ["hatchling"]
