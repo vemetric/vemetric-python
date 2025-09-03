@@ -24,6 +24,7 @@ vemetricClient = VemetricClient(token="YOUR_PROJECT_TOKEN")
 vemetricClient.track_event(
   "SignupCompleted",
   user_identifier="user-id",
+  user_display_name="John Doe",
   event_data={"key": "value"},
 )
 

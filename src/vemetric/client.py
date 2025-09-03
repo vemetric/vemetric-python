@@ -53,18 +53,24 @@ class VemetricClient:
         self,
         event_name: str,
         *,
-        user_identifier: Optional[str] = None,
+        user_identifier: str,
         event_data: Optional[Dict[str, Any]] = None,
         user_data: Optional[UserData] = None,
+        user_display_name: Optional[str] = None,
     ) -> None:
         if not event_name:
             raise ValueError("event_name must not be empty")
+        if not user_identifier:
+            raise ValueError("user_identifier must not be empty")
 
         payload = {
             "name": event_name,
             "userIdentifier": user_identifier,
-            "customData": event_data,
         }
+        if event_data:
+            payload["customData"] = event_data
+        if user_display_name:
+            payload["displayName"] = user_display_name
         if user_data:
             payload["userData"] = user_data
         self._post("/e", payload)

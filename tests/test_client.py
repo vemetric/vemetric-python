@@ -39,13 +39,13 @@ def test_track_event_basic(client, mock_session):
     mock_session.post.return_value = mock_response
     
     client._sess = mock_session
-    client.track_event("test_event")
-    
+    client.track_event("test_event", user_identifier="user123")
+
     mock_session.post.assert_called_once()
     args, kwargs = mock_session.post.call_args
     assert args[0] == "https://hub.vemetric.com/e"
     assert kwargs["headers"]["Token"] == "test-token"
-    assert json.loads(kwargs["data"]) == {"name": "test_event"}
+    assert json.loads(kwargs["data"]) == {"name": "test_event", "userIdentifier": "user123"}
 
 def test_track_event_with_all_data(client, mock_session):
     mock_response = Mock()
@@ -56,6 +56,7 @@ def test_track_event_with_all_data(client, mock_session):
     client.track_event(
         "test_event",
         user_identifier="user123",
+        user_display_name="John Doe",
         event_data={"action": "click"},
         user_data={
         "set": {"name": "Test User"},
@@ -71,6 +72,7 @@ def test_track_event_with_all_data(client, mock_session):
     assert json.loads(kwargs["data"]) == {
         "name": "test_event",
         "userIdentifier": "user123",
+        "displayName": "John Doe",
         "customData": {"action": "click"},
         "userData": {
             "set": {"name": "Test User"},
@@ -81,7 +83,11 @@ def test_track_event_with_all_data(client, mock_session):
 
 def test_track_event_empty_name(client):
     with pytest.raises(ValueError, match="event_name must not be empty"):
-        client.track_event("")
+        client.track_event("", user_identifier="user123")
+
+def test_track_event_empty_identifier(client):
+    with pytest.raises(ValueError, match="user_identifier must not be empty"):
+        client.track_event("test_event", user_identifier="")
 
 def test_update_user_basic(client, mock_session):
     mock_response = Mock()
@@ -134,7 +140,7 @@ def test_network_error_handling(client, mock_session):
     
     client._sess = mock_session
     # Should not raise an exception, just log the error
-    client.track_event("test_event")
+    client.track_event("test_event", user_identifier="user123")
 
 def test_http_error_handling(client, mock_session):
     mock_response = Mock()
@@ -144,4 +150,4 @@ def test_http_error_handling(client, mock_session):
     
     client._sess = mock_session
     # Should not raise an exception, just log the error
-    client.track_event("test_event") 
+    client.track_event("test_event", user_identifier="user123") 
