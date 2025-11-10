@@ -1,6 +1,6 @@
 [project]
 name            = "vemetric"
-version         = "0.1.0"
+version         = "0.2.0"
 description     = "Official Python SDK for Vemetric"
 readme          = "README.md"
 authors         = [{ name="Vemetric", email="info@vemetric.com" }]
