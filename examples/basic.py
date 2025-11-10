@@ -11,6 +11,7 @@ vemetricClient.track_event(
 vemetricClient.update_user(
     "dmmIrnzUzVMJD03tjCiHXTEEgX6xIPJm",
     user_data={"set": {"plan": "BusinessPython"}},
+    user_avatar_url="https://emoji.games/logo.png",
 )
 
 print("✅ events sent")

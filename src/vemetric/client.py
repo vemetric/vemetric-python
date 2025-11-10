@@ -79,6 +79,8 @@ class VemetricClient:
         self,
         user_identifier: str,
         *,
+        user_display_name: Optional[str] = None,
+        user_avatar_url: Optional[str] = None,
         user_data: Optional[UserData] = None,
     ) -> None:
         if not user_identifier:
@@ -87,6 +89,10 @@ class VemetricClient:
         payload = {
             "userIdentifier": user_identifier,
         }
+        if user_display_name:
+            payload["displayName"] = user_display_name
+        if user_avatar_url:
+            payload["avatarUrl"] = user_avatar_url
         if user_data:
             payload["data"] = user_data
         self._post("/u", payload)
